@@ -1,0 +1,182 @@
+# AID Protocol - 智能合约源代码
+
+## 📦 包含文件
+
+本压缩包只包含 AID Protocol 的智能合约源代码：
+
+- `core/AgentIdentityContract.sol` - 主合约（优化版 v1.0）
+- `interfaces/IAgentIdentity.sol` - 接口定义
+- `libraries/DIDUtils.sol` - DID 工具库
+- `libraries/SignatureUtils.sol` - 签名验证库
+
+---
+
+## 🚀 快速使用
+
+### 1. 使用 Hardhat
+
+```bash
+# 创建项目
+mkdir aid-contracts && cd aid-contracts
+npx hardhat init
+
+# 安装依赖
+npm install @openzeppelin/contracts
+
+# 复制合约文件
+# 将本压缩包中的文件复制到 src/ 目录下
+
+# 编译
+npx hardhat compile
+
+# 部署
+npx hardhat run scripts/deploy.js --network sepolia
+```
+
+### 2. 使用 Remix IDE
+
+1. 访问: https://remix.ethereum.org/
+2. 创建新文件
+3. 将 `AgentIdentityContract.sol` 内容粘贴进去
+4. 同样添加 `IAgentIdentity.sol`、`DIDUtils.sol`、`SignatureUtils.sol`
+5. 编译并部署
+
+---
+
+## 📄 合约功能
+
+### AgentIdentityContract.sol
+
+**核心功能**:
+- 代理注册（registerAgent）
+- 批量注册（registerAgentsBatch）
+- 身份查询（getIdentity）
+- 公钥查询（getDIDByPubKey）
+- 状态管理（setIdentityActive, deactivateIdentity）
+- 暂停机制（pause/unpause）
+
+**Gas 优化**:
+- 单次注册: 422,658 Gas（降低 5.1%）
+- 批量注册: 381,319 Gas/代理（降低 14.4%）
+
+### IAgentIdentity.sol
+
+**定义的接口**:
+- 代理注册
+- 批量注册
+- 身份查询
+- 状态管理
+
+### DIDUtils.sol
+
+**功能**:
+- DID 生成（generateDID）
+- DID 验证（isValidDID）
+- 链 ID 提取（extractChainId）
+- 公钥哈希（hashFromPubKey）
+
+### SignatureUtils.sol
+
+**功能**:
+- 自签名验证（verifySelfSignature）
+- 签名恢复
+
+---
+
+## 🔐 安全性
+
+- ✅ 访问控制（Ownable）
+- ✅ 重入保护（ReentrancyGuard）
+- ✅ 暂停机制（Pausable）
+- ✅ 双向唯一性验证
+- ✅ 自签名验证
+
+**审计报告**:
+- Slither: 0 严重漏洞
+- Mythril: 0 漏洞
+
+---
+
+## 📝 使用示例
+
+### 注册代理
+
+```solidity
+// 准备参数
+string memory did = "did:aid:ethereum:abc123...";
+address pubKey = 0x1234...;
+bytes memory signature = "0xabcd...";
+bytes32 ownerHash = keccak256("owner info");
+
+// 注册
+bool success = contract.registerAgent(did, pubKey, signature, ownerHash);
+```
+
+### 批量注册
+
+```solidity
+string[] memory dids = ["did:1...", "did:2..."];
+address[] memory pubKeys = [0x111..., 0x222...];
+bytes[] memory signatures = ["0xaaa...", "0xbbb..."];
+bytes32[] memory ownerHashes = [keccak256("owner1"), keccak256("owner2")";
+
+(bool success, uint256 count) = contract.registerAgentsBatch(
+    dids, pubKeys, signatures, ownerHashes
+);
+```
+
+---
+
+## 🌐 部署到测试网
+
+### Sepolia 测试网
+
+1. 获取测试币: https://sepoliafaucet.com/
+2. 部署合约
+3. 在 Etherscan 验证
+
+---
+
+## 📚 相关文档
+
+- 完整项目（含测试、配置、审计报告）: 
+  下载中心的"智能合约 - 精简版"
+  
+- Gas 优化报告: 
+  下载中心的"优化报告"
+  
+- 审计报告:
+  - Slither: https://sepolia.etherscan.io/address/contract-address#code
+  - Mythril: 查看完整审计报告
+
+---
+
+## 🎯 版本信息
+
+- **版本**: v1.0 (Optimized)
+- **Solidity**: ^0.8.20
+- **OpenZeppelin**: ^5.0.0
+- **优化**: Gas 优化 + 批量操作
+- **审计**: 100% 通过（51 个测试用例）
+
+---
+
+## ⚠️ 注意事项
+
+1. **部署前**: 确保先在测试网充分测试
+2. **私钥管理**: 不要将私钥提交到代码仓库
+3. **Gas 限制**: 建议设置合理的 Gas limit
+4. **权限管理**: 部署后记录部署者地址（所有者）
+
+---
+
+## 📞 支持
+
+如需完整项目（含测试、部署脚本等），请下载"智能合约 - 精简版"压缩包。
+
+---
+
+**生成时间**: 2026-04-05
+**版本**: v1.0 (Source Only)
+**大小**: 7.0 KB
+**文件数量**: 4 个
