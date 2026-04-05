@@ -85,3 +85,12 @@ The project direction, architecture design, and core rules are controlled by the
 Whether you are a developer, security researcher, document writer, or ecology enthusiast, you are welcome to join us to build the next-generation AI identity infrastructure.
 
 无论你是开发者、安全研究者、文档编写者还是生态爱好者，都欢迎加入，共同构建下一代 AI 身份基础设施。
+
+---
+
+ ## 测试⽹部署信息 
+- 测试⽹：Sepolia Test Network
+- 主合约地址：0xD7ACd2a9FD159E69Bb102A1ca21C9a3e3A5F771B
+- 区块链浏览器查询：
+https://sepolia.etherscan.io/address/0xD7ACd2a9FD159E69Bb102A1ca21C9a3e3A5F771B
+- 部署状态：已成功部署，可正常调⽤、测试
